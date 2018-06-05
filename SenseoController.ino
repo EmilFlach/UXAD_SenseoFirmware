@@ -1,3 +1,4 @@
+// Enable senseo relais and disable after delay
 void senseoPress() {
   if (!senseoIsBeingPressed) {
     digitalWrite(senseoPin, HIGH);
@@ -6,11 +7,13 @@ void senseoPress() {
   }
 }
 
+// Called by timer in senseoPress
 void senseoEndPress() {
   digitalWrite(senseoPin, LOW);
   senseoIsBeingPressed = false;
 }
 
+// Sync presses with senseo state
 void senseoEnable() {
   if (!senseoIsOn) {
     senseoPress();
@@ -18,6 +21,7 @@ void senseoEnable() {
   }
 }
 
+// Sync presses with senseo state
 void senseoDisable() {
   if (senseoIsOn) {
     senseoPress();
@@ -25,6 +29,7 @@ void senseoDisable() {
   }
 }
 
+// Convert the amount of LEDs to the time the senseo should be on
 long getTimeFromLeds(int leds) {
   long value;
   switch (leds) {
